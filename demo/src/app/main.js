@@ -32,7 +32,7 @@ export function configure(aurelia) {
     .plugin('gooy/aurelia-ace')
   ;
 
-  aurelia.globalizeResources("loading-indicator");
+  aurelia.use.globalResources("loading-indicator");
 
   aurelia.start().then(a => a.setRoot());
 }
