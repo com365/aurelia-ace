@@ -154,7 +154,8 @@ var AceEditor = (function () {
     key: "_parseValue",
     value: function _parseValue(obj) {
       if (typeof obj == "object") obj = JSON.stringify(obj);
-      if (AceEditor.options.beautify) obj = this._beautify(obj, AceEditor.options.mode);
+      var o = this.editor.getOptions();
+      if (o.beautify) obj = this._beautify(obj, o.mode);
       return obj;
     }
   }, {
