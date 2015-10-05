@@ -81,6 +81,7 @@ System.register(["aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-java
           _defineDecoratedPropertyDescriptor(this, "value", _instanceInitializers);
 
           this.editor = null;
+          this.onAttached = null;
 
           this.element = element;
           this._uid = ++AceEditor.uid;
@@ -105,9 +106,12 @@ System.register(["aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-java
             var e = this.editor = ace.edit(this.id);
 
             e.$blockScrolling = Infinity;
-            ace.config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.1.9/");
+            ace.config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.2.0/");
 
             this.updateOptions(Object.assign({}, AceEditor.options));
+            if (this.onAttached) {
+              this.onAttached(this);
+            }
           }
         }, {
           key: "setValue",

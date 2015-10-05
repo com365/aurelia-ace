@@ -30,6 +30,7 @@ export class AceEditor {
   @bindable value = "";
 
   editor = null;
+  onAttached = null;
 
   static uid = 1;
 
@@ -60,13 +61,16 @@ export class AceEditor {
     var e = this.editor = ace.edit(this.id);
     //disable scrolling into view (a deprecated feature for ace)
     e.$blockScrolling = Infinity;
-    ace.config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.1.9/");
+    ace.config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.2.0/");
 
     //e.setShowPrintMargin(false);
     //e.setTheme("ace/theme/monokai");
     //e.getSession().setMode("ace/mode/javascript");
 
     this.updateOptions(Object.assign({},AceEditor.options));
+    if (this.onAttached) {
+        this.onAttached(this);
+    }
   }
 
   setValue(v){
