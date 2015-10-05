@@ -30,7 +30,7 @@ export class AceEditor {
   @bindable value = "";
 
   editor = null;
-  onAttached = null;
+  options = null;
 
   static uid = 1;
 
@@ -53,23 +53,14 @@ export class AceEditor {
     //set initial value from the innerHTML
     if(!this.value && this.element.innerHTML) this.element.innerHTML = dedent(this.element.innerHTML).trim();
     //set initial value from the binding
-    if(this.value){
-      this.value = this._parseValue(this.value);
-      this.element.innerHTML = dedent(this.value).trim();
-    }
 
     var e = this.editor = ace.edit(this.id);
     //disable scrolling into view (a deprecated feature for ace)
     e.$blockScrolling = Infinity;
     ace.config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.2.0/");
-
-    //e.setShowPrintMargin(false);
-    //e.setTheme("ace/theme/monokai");
-    //e.getSession().setMode("ace/mode/javascript");
-
-    this.updateOptions(Object.assign({},AceEditor.options));
-    if (this.onAttached) {
-        this.onAttached(this);
+    this.updateOptions(this.options || Object.assign({},AceEditor.options));
+    if(this.value){
+        this.valueChanged(this.value);
     }
   }
 
@@ -84,12 +75,15 @@ export class AceEditor {
   }
 
   valueChanged(value){
-    this.value = this._parseValue(this.value);
-    if(this.editor) this.editor.setValue(this.value,1);
+    if(this.editor) {
+        this.value = this._parseValue(this.value);
+        this.editor.setValue(this.value,1);
+    }
   }
 
   setOptions(options){
-    this.updateOptions(Object.assign({},AceEditor.options,options));
+    this.options = Object.assign({}, AceEditor.options, options);
+    this.updateOptions(this.options);
     return this;
   }
 
@@ -114,7 +108,7 @@ export class AceEditor {
 
   _parseValue(obj){
     if(typeof obj == "object") obj = JSON.stringify(obj);
-    var o = this.editor.getOptions();
+    var o = this.options;
     if(o.beautify) obj = this._beautify(obj, o.mode);
     return obj;
   }

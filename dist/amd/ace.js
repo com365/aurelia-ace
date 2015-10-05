@@ -66,7 +66,7 @@ define(["exports", "aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-ja
       _defineDecoratedPropertyDescriptor(this, "value", _instanceInitializers);
 
       this.editor = null;
-      this.onAttached = null;
+      this.options = null;
 
       this.element = element;
       this._uid = ++AceEditor.uid;
@@ -83,19 +83,13 @@ define(["exports", "aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-ja
 
         if (!this.value && this.element.innerHTML) this.element.innerHTML = dedent(this.element.innerHTML).trim();
 
-        if (this.value) {
-          this.value = this._parseValue(this.value);
-          this.element.innerHTML = dedent(this.value).trim();
-        }
-
         var e = this.editor = _ace2["default"].edit(this.id);
 
         e.$blockScrolling = Infinity;
         _ace2["default"].config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.2.0/");
-
-        this.updateOptions(Object.assign({}, AceEditor.options));
-        if (this.onAttached) {
-          this.onAttached(this);
+        this.updateOptions(this.options || Object.assign({}, AceEditor.options));
+        if (this.value) {
+          this.valueChanged(this.value);
         }
       }
     }, {
@@ -113,13 +107,16 @@ define(["exports", "aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-ja
     }, {
       key: "valueChanged",
       value: function valueChanged(value) {
-        this.value = this._parseValue(this.value);
-        if (this.editor) this.editor.setValue(this.value, 1);
+        if (this.editor) {
+          this.value = this._parseValue(this.value);
+          this.editor.setValue(this.value, 1);
+        }
       }
     }, {
       key: "setOptions",
       value: function setOptions(options) {
-        this.updateOptions(Object.assign({}, AceEditor.options, options));
+        this.options = Object.assign({}, AceEditor.options, options);
+        this.updateOptions(this.options);
         return this;
       }
     }, {
@@ -145,7 +142,7 @@ define(["exports", "aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-ja
       key: "_parseValue",
       value: function _parseValue(obj) {
         if (typeof obj == "object") obj = JSON.stringify(obj);
-        var o = this.editor.getOptions();
+        var o = this.options;
         if (o.beautify) obj = this._beautify(obj, o.mode);
         return obj;
       }
