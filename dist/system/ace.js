@@ -1,7 +1,7 @@
 System.register(["aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-javascript", "js-beautify", "js-beautify/beautify-css", "js-beautify/beautify-html"], function (_export) {
   "use strict";
 
-  var bindable, noView, customElement, skipContentProcessing, ace, beautify, css__beautify, html__beautify, js_beautify, css_beautify, html_beautify, AceEditor;
+  var bindable, noView, customElement, processContent, ace, beautify, css__beautify, html__beautify, js_beautify, css_beautify, html_beautify, AceEditor;
 
   var _createDecoratedClass = (function () { function defineProperties(target, descriptors, initializers) { for (var i = 0; i < descriptors.length; i++) { var descriptor = descriptors[i]; var decorators = descriptor.decorators; var key = descriptor.key; delete descriptor.key; delete descriptor.decorators; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor || descriptor.initializer) descriptor.writable = true; if (decorators) { for (var f = 0; f < decorators.length; f++) { var decorator = decorators[f]; if (typeof decorator === "function") { descriptor = decorator(target, key, descriptor) || descriptor; } else { throw new TypeError("The decorator for method " + descriptor.key + " is of the invalid type " + typeof decorator); } } if (descriptor.initializer !== undefined) { initializers[key] = descriptor; continue; } } Object.defineProperty(target, key, descriptor); } } return function (Constructor, protoProps, staticProps, protoInitializers, staticInitializers) { if (protoProps) defineProperties(Constructor.prototype, protoProps, protoInitializers); if (staticProps) defineProperties(Constructor, staticProps, staticInitializers); return Constructor; }; })();
 
@@ -25,7 +25,7 @@ System.register(["aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-java
       bindable = _aureliaFramework.bindable;
       noView = _aureliaFramework.noView;
       customElement = _aureliaFramework.customElement;
-      skipContentProcessing = _aureliaFramework.skipContentProcessing;
+      processContent = _aureliaFramework.processContent;
     }, function (_ace) {
       ace = _ace["default"];
     }, function (_aceThemeMonokai) {}, function (_aceModeJavascript) {}, function (_jsBeautify) {
@@ -189,7 +189,7 @@ System.register(["aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-java
         }], null, _instanceInitializers);
 
         var _AceEditor = AceEditor;
-        AceEditor = skipContentProcessing(AceEditor) || AceEditor;
+        AceEditor = processContent(false)(AceEditor) || AceEditor;
         AceEditor = customElement('ace')(AceEditor) || AceEditor;
         AceEditor = noView(AceEditor) || AceEditor;
         return AceEditor;

@@ -174,7 +174,7 @@ define(["exports", "aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-ja
     }], null, _instanceInitializers);
 
     var _AceEditor = AceEditor;
-    AceEditor = (0, _aureliaFramework.skipContentProcessing)(AceEditor) || AceEditor;
+    AceEditor = (0, _aureliaFramework.processContent)(false)(AceEditor) || AceEditor;
     AceEditor = (0, _aureliaFramework.customElement)('ace')(AceEditor) || AceEditor;
     AceEditor = (0, _aureliaFramework.noView)(AceEditor) || AceEditor;
     return AceEditor;

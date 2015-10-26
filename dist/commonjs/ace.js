@@ -187,7 +187,7 @@ var AceEditor = (function () {
   }], null, _instanceInitializers);
 
   var _AceEditor = AceEditor;
-  AceEditor = (0, _aureliaFramework.skipContentProcessing)(AceEditor) || AceEditor;
+  AceEditor = (0, _aureliaFramework.processContent)(false)(AceEditor) || AceEditor;
   AceEditor = (0, _aureliaFramework.customElement)('ace')(AceEditor) || AceEditor;
   AceEditor = (0, _aureliaFramework.noView)(AceEditor) || AceEditor;
   return AceEditor;
