@@ -28,11 +28,13 @@
     "jshint": "jshint src task test gulpfile.js"
   },
   "dependencies": {
+    "brace": "^0.8.0",
     "filesize": "^3.1.2",
     "gulp-consolidate": "^0.1.2",
     "gulp-git": "^1.2.4",
     "gulp-iconfont": "^3.0.2",
     "gulp-live-server": "0.0.22",
+    "js-beautify": "github:beautify-web/js-beautify#v1.6.2",
     "karma": "^0.12.37",
     "lodash": "^3.10.0"
   },

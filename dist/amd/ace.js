@@ -1,4 +1,4 @@
-define(["exports", "aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-javascript", "js-beautify", "js-beautify/beautify-css", "js-beautify/beautify-html"], function (exports, _aureliaFramework, _ace, _aceThemeMonokai, _aceModeJavascript, _jsBeautify, _jsBeautifyBeautifyCss, _jsBeautifyBeautifyHtml) {
+define(["exports", "aurelia-framework", "brace", "brace/ext/searchbox", "brace/mode/css", "brace/mode/html", "brace/mode/javascript", "brace/theme/textmate", "js-beautify"], function (exports, _aureliaFramework, _brace, _braceExtSearchbox, _braceModeCss, _braceModeHtml, _braceModeJavascript, _braceThemeTextmate, _jsBeautify) {
   "use strict";
 
   Object.defineProperty(exports, "__esModule", {
@@ -13,17 +13,13 @@ define(["exports", "aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-ja
 
   function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _descriptor = descriptors[key]; if (!_descriptor) return; var descriptor = {}; for (var _key in _descriptor) descriptor[_key] = _descriptor[_key]; descriptor.value = descriptor.initializer ? descriptor.initializer.call(target) : undefined; Object.defineProperty(target, key, descriptor); }
 
-  var _ace2 = _interopRequireDefault(_ace);
+  var _ace = _interopRequireDefault(_brace);
 
   var _beautify2 = _interopRequireDefault(_jsBeautify);
 
-  var _css__beautify = _interopRequireDefault(_jsBeautifyBeautifyCss);
-
-  var _html__beautify = _interopRequireDefault(_jsBeautifyBeautifyHtml);
-
   var js_beautify = _beautify2["default"].js_beautify;
-  var css_beautify = _css__beautify["default"].css_beautify;
-  var html_beautify = _html__beautify["default"].html_beautify;
+  var css_beautify = _beautify2["default"].css_beautify;
+  var html_beautify = _beautify2["default"].html_beautify;
 
   var AceEditor = (function () {
     var _instanceInitializers = {};
@@ -46,8 +42,8 @@ define(["exports", "aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-ja
       value: {
         showPrintMargin: false,
         beautify: true,
-        mode: "javascript",
-        theme: "monokai"
+        mode: 'javascript',
+        theme: 'textmate'
       },
       enumerable: true
     }, {
@@ -83,10 +79,10 @@ define(["exports", "aurelia-framework", "ace", "ace/theme-monokai", "ace/mode-ja
 
         if (!this.value && this.element.innerHTML) this.element.innerHTML = dedent(this.element.innerHTML).trim();
 
-        var e = this.editor = _ace2["default"].edit(this.id);
+        var e = this.editor = _ace["default"].edit(this.id);
 
         e.$blockScrolling = Infinity;
-        _ace2["default"].config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.2.0/");
+        _ace["default"].config.set("basePath", "/node_modules/brace/");
         this.updateOptions(this.options || Object.assign({}, AceEditor.options));
         if (this.value) {
           this.valueChanged(this.value);

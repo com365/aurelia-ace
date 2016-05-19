@@ -14,29 +14,27 @@ function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _des
 
 var _aureliaFramework = require('aurelia-framework');
 
-var _ace = require("ace");
+var _brace = require("brace");
 
-var _ace2 = _interopRequireDefault(_ace);
+var _brace2 = _interopRequireDefault(_brace);
 
-require("ace/theme-monokai");
+require("brace/ext/searchbox");
 
-require("ace/mode-javascript");
+require("brace/mode/css");
+
+require("brace/mode/html");
+
+require("brace/mode/javascript");
+
+require("brace/theme/textmate");
 
 var _jsBeautify = require('js-beautify');
 
 var _jsBeautify2 = _interopRequireDefault(_jsBeautify);
 
-var _jsBeautifyBeautifyCss = require('js-beautify/beautify-css');
-
-var _jsBeautifyBeautifyCss2 = _interopRequireDefault(_jsBeautifyBeautifyCss);
-
-var _jsBeautifyBeautifyHtml = require('js-beautify/beautify-html');
-
-var _jsBeautifyBeautifyHtml2 = _interopRequireDefault(_jsBeautifyBeautifyHtml);
-
 var js_beautify = _jsBeautify2["default"].js_beautify;
-var css_beautify = _jsBeautifyBeautifyCss2["default"].css_beautify;
-var html_beautify = _jsBeautifyBeautifyHtml2["default"].html_beautify;
+var css_beautify = _jsBeautify2["default"].css_beautify;
+var html_beautify = _jsBeautify2["default"].html_beautify;
 
 var AceEditor = (function () {
   var _instanceInitializers = {};
@@ -59,8 +57,8 @@ var AceEditor = (function () {
     value: {
       showPrintMargin: false,
       beautify: true,
-      mode: "javascript",
-      theme: "monokai"
+      mode: 'javascript',
+      theme: 'textmate'
     },
     enumerable: true
   }, {
@@ -96,10 +94,10 @@ var AceEditor = (function () {
 
       if (!this.value && this.element.innerHTML) this.element.innerHTML = dedent(this.element.innerHTML).trim();
 
-      var e = this.editor = _ace2["default"].edit(this.id);
+      var e = this.editor = _brace2["default"].edit(this.id);
 
       e.$blockScrolling = Infinity;
-      _ace2["default"].config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.2.0/");
+      _brace2["default"].config.set("basePath", "/node_modules/brace/");
       this.updateOptions(this.options || Object.assign({}, AceEditor.options));
       if (this.value) {
         this.valueChanged(this.value);

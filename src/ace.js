@@ -1,15 +1,16 @@
 import {bindable,noView,customElement,processContent} from 'aurelia-framework';
-import ace from "ace";
-import "ace/theme-monokai";
-import "ace/mode-javascript";
+
+import ace from "brace";
+import "brace/ext/searchbox";
+import "brace/mode/css";
+import "brace/mode/html";
+import "brace/mode/javascript";
+import "brace/theme/textmate";
 
 import beautify from 'js-beautify';
-import css__beautify from 'js-beautify/beautify-css';
-import html__beautify from 'js-beautify/beautify-html';
-
 var js_beautify = beautify.js_beautify;
-var css_beautify = css__beautify.css_beautify;
-var html_beautify = html__beautify.html_beautify;
+var css_beautify = beautify.css_beautify;
+var html_beautify = beautify.html_beautify;
 
 @noView
 @customElement('ace')
@@ -17,10 +18,10 @@ var html_beautify = html__beautify.html_beautify;
 export class AceEditor {
 
   static options = {
-    showPrintMargin:false,
+    showPrintMargin: false,
     beautify: true,
-    mode:"javascript",
-    theme: "monokai"
+    mode: 'javascript',
+    theme: 'textmate'
   };
 
   static setOptions(options){
@@ -57,7 +58,7 @@ export class AceEditor {
     var e = this.editor = ace.edit(this.id);
     //disable scrolling into view (a deprecated feature for ace)
     e.$blockScrolling = Infinity;
-    ace.config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.2.0/");
+    ace.config.set("basePath", "/node_modules/brace/");
     this.updateOptions(this.options || Object.assign({},AceEditor.options));
     if(this.value){
         this.valueChanged(this.value);
