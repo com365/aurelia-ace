@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "brace": "^0.8.0",
-    "js-beautify": "github:beautify-web/js-beautify#v1.6.2"
+    "js-beautify": "1.6.2"
   },
   "devDependencies": {
     "bootstrap-less": "^3.3.8",
